@@ -1,32 +1,23 @@
 module.exports = (sequelize,DataTypes) => {
-    const model = sequelize.define("User",{
-        username:{
-            type:DataTypes.STRING(255)
-        },
-        password:{
-            type:DataTypes.STRING(255)
-        },
+    const model = sequelize.define('Profile',{
         name:{
             type:DataTypes.STRING(255)
         },
-        birthdate:{
+        pic:{
             type:DataTypes.STRING(255)
         },
         coverpic:{
-            type:DataTypes.STRING(255)
-        },
-        pic:{
             type:DataTypes.STRING(255)
         },
         gender:{
             type:DataTypes.STRING(10)
         }
     },{
-        tableName:'users',
+        tableName:'profiles',
         timestamps:false
     })
     model.associate = models => {
-        model.hasOne(models.Profile,{foreignKey:'user_id'})
+        model.belongsTo(models.User,{foreignKey:'user_id'})
     }
     return model
 }

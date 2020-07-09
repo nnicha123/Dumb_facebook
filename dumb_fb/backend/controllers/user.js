@@ -19,7 +19,14 @@ const registerUser = async (req, res) => {
             username: username,
             password: hashedPassword
         })
-        res.status(201).send({ addUser, message: 'Successfully registered' })
+        const newProfile = await db.Profile.create({
+            name: name,
+            pic: pic,
+            coverpic: coverpic,
+            gender: gender,
+            user_id: addUser.id
+        })
+        res.status(201).send({ addUser, newProfile, message: 'Successfully registered' })
     }
 }
 const loginUser = async (req, res) => {
@@ -34,14 +41,29 @@ const loginUser = async (req, res) => {
                 id: user.id
             }
             const token = jwt.sign(payload, process.env.SECRET_OR_KEY, { expiresIn: 3600 })
-            res.status(200).send({ token,message: 'Logged In' })
-    }
+            res.status(200).send({ token, message: 'Logged In' })
+        }
         else {
-    res.status(400).send({ message: 'User not found' })
+            res.status(400).send({ message: 'User not found' })
+        }
+    }
 }
+const modifyProfile = async(req,res) => {
+    const {name,coverpic,pic,gender} = req.body
+    const item = await db.Profile.findOne({id:req.params.id}).then({where:{id:targetId,user_id:req.user.id}})
+    if(item){
+        item.update({
+            name:name,
+            coverpic:coverpic,
+            pic:pic,
+            gender:gender
+        })
+        res.status(200).send({message:'Successfully Updated!'})
+    }else{
+        res.status(400);send({message:'Unable to update'})
     }
 }
 
 module.exports = {
-    registerUser, loginUser
+    registerUser, loginUser,modifyProfile
 }
