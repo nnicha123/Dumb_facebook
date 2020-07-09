@@ -1,12 +1,13 @@
 nav{
   display: flex;
   height:max-content;
-  background-color: rgb(42, 42, 46);
+  background-color: #2a4781;
   list-style: none;
+  justify-content: flex-end;
 }
 nav li{
   padding: 20px 0;
-  background-color: rgb(42, 42, 46);
+  background-color: #2a4781;
 }
 nav li a{
   text-decoration: none;

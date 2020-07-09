@@ -1,31 +1,29 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route,NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 
 import './App.css'
 import Profile from './components/Profile'
 import Login from './components/Login'
 import Register from './components/Register'
-
+import Nav from './Nav';
+import lucy from './users/lucy.jpg'
+import lucyCover from './users/lucy-cover.jpg'
+import sunset from './users/sunset.jpg'
+import boat from './users/boat.jpeg'
 class App extends Component {
+  state ={
+    profile:{name:'Lucy Sun',pic:lucy,coverpic:boat,gender:'female'},
+    posts:[{image:sunset,comment:'With my bestie in this beautiful place',postOwnerImg:lucy,name:'Lucy Sun'}]
+  }
   render() {
     return (
       <div>
         <Router>
-          <nav>
-            <li>
-              <NavLink exact to='/' activeStyle={{ backgroundColor: 'green' }}>Login</NavLink>
-            </li>
-            <li>
-              <NavLink exact to='/register' activeStyle={{ backgroundColor: 'green' }}>Register</NavLink>
-            </li>
-            <li>
-              <NavLink exact to='/profile' activeStyle={{ backgroundColor: 'green' }}>Profile</NavLink>
-            </li>
-          </nav>
+          <Nav />
           <Switch>
             <Route exact path='/' component={Login} />
-            <Route exact path='/register' component={Register}/>
-            <Route exact path='/profile' component={Profile}/>
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/profile' render={() => <Profile states={this.state}/>} />
           </Switch>
         </Router>
       </div>
