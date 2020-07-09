@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route,NavLink } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css'
+import Profile from './components/Profile'
+import Login from './components/Login'
+import Register from './components/Register'
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Router>
+          <nav>
+            <li>
+              <NavLink exact to='/' activeStyle={{ backgroundColor: 'green' }}>Login</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/register' activeStyle={{ backgroundColor: 'green' }}>Register</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/profile' activeStyle={{ backgroundColor: 'green' }}>Profile</NavLink>
+            </li>
+          </nav>
+          <Switch>
+            <Route exact path='/' component={Login} />
+            <Route exact path='/register' component={Register}/>
+            <Route exact path='/profile' component={Profile}/>
+          </Switch>
+        </Router>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
