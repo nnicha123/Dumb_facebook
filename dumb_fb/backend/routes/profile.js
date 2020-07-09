@@ -6,5 +6,7 @@ const profileController = require('../controllers/profile.js')
 const authentication = passport.authenticate("jwt",{session:false})
 
 router.post('/',authentication,profileController.addProfile)
+router.put('/:id',authentication,profileController.modifyProfile)
+router.delete('/:id',authentication,profileController.deleteProfile)
 
 module.exports = router
