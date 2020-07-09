@@ -2,10 +2,15 @@ const db = require('../models')
 
 const postComment = async (req, res) => {
     const {name,comment,date} = req.body
+    let now = new Date()
+    const dd = now.getDate()
+    const mm = Number(now.getMonth()) + 1
+    const yyyy = now.getFullYear()
+    now = dd + '/' + mm + '/' + yyyy
     const newComment = await db.Comment.create({
         name:name,
         comment:comment,
-        date:Date.now(),
+        date:now,
         user_id:req.user.id
     })
     res.status(201).send(newComment)
@@ -20,12 +25,17 @@ const deleteComment = async(req,res) => {
 const modifyComment = async(req,res) => {
     const targetId = req.params.id
     const {name,comment,date} = req.body
+    let now = new Date()
+    const dd = now.getDate()
+    const mm = Number(now.getMonth()) + 1
+    const yyyy = now.getFullYear()
+    now = dd + '/' + mm + '/' + yyyy
     const targetComment = await db.Comment.findOne({where:{id:targetId,user_id:req.user.id}})
     if(targetComment){
         targetComment.update({
             name:name,
             comment:comment,
-            date:Date.now()
+            date:now
         })
         res.status(200).send({message:'updated comment'})
     }
