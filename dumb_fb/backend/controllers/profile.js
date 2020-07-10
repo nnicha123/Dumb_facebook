@@ -1,12 +1,19 @@
 const db = require('../models')
 
+const  getProfile = async (req,res) => {
+    const username = req.params.username
+    const profile = await db.Profile.findOne({where:{username:username,user_id:req.user.id}})
+    profile ? res.status(200).send(profile) : res.status(400).send({message:'Cannot find user'})
+}
+        
 const addProfile = async (req,res) => {
-    const {name,pic,coverpic,gender} = req.body
+    const {name,pic,coverpic,gender,username} = req.body
     const newProfile = await db.Profile.create({
         name:name,
         pic:pic,
         coverpic:coverpic,
         gender:gender,
+        username:username,
         user_id:req.user.id
     })
     res.status(201).send(newProfile)
@@ -38,5 +45,5 @@ const deleteProfile = async (req,res) => {
 }
 
 module.exports = {
-    addProfile,modifyProfile,deleteProfile
+    addProfile,modifyProfile,deleteProfile,getProfile
 }

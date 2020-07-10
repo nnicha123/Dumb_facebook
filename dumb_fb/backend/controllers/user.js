@@ -19,7 +19,15 @@ const registerUser = async (req, res) => {
             username: username,
             password: hashedPassword
         })
-        res.status(201).send({ addUser, message: 'Successfully registered' })
+        const addProfile = await db.Profile.create({
+            name:name,
+            pic:pic,
+            coverpic:coverpic,
+            gender:gender,
+            username:username,
+            user_id:addUser.id
+        })
+        res.status(201).send({ addUser,addProfile, message: 'Successfully registered' })
     }
 }
 const loginUser = async (req, res) => {

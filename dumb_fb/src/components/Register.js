@@ -14,6 +14,7 @@ function Register() {
     const onFinish = values => {
         axios.post('http://localhost:8000/users/register',values).then(res => {
             notification.success({message:'Successfully registered'})
+            window.location.replace('/')
             console.log(res)
         }).catch(err => {
             notification.error({message:'Unable to register'})

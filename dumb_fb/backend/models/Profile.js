@@ -11,6 +11,9 @@ module.exports = (sequelize,DataTypes) => {
         },
         gender:{
             type:DataTypes.STRING(10)
+        },
+        username:{
+            type:DataTypes.STRING(255)
         }
     },{
         tableName:'profiles',

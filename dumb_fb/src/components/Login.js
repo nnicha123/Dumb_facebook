@@ -16,7 +16,8 @@ function Login() {
     const onFinish = values => {
         axios.post('http://localhost:8000/users/login',values).then(res => {
             LocalStorageService.setToken(res.data.token)
-            notification.success({ message: `Logged in as ${values.username}` })
+            window.location.replace('/profile')
+            notification.success({ message: `Logged in as ${values.username}, name:${values.name}` })
         })
         console.log(values)
     };
