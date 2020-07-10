@@ -4,10 +4,8 @@ import LocalStorageService from '../services/localStorageService'
 axios.interceptors.request.use(
     config => {
         const token = LocalStorageService.getToken()
-        if(token) {
-            config.headers["Authorization"] = `Bearer ${token}`
+        if(token) config.headers["Authorization"] = `Bearer ${token}`
             return config
-        }
     },
     err => Promise.reject(err)
 )

@@ -1,6 +1,8 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,notification } from 'antd';
 import './Login.css'
+import axios from '../config/axios';
+import LocalStorageService from '../services/localStorageService'
 
 function Login() {
 
@@ -12,7 +14,11 @@ function Login() {
         wrapperCol: { offset: 10, span: 10 },
     };
     const onFinish = values => {
-        console.log(values);
+        axios.post('http://localhost:8000/users/login',values).then(res => {
+            LocalStorageService.setToken(res.data.token)
+            notification.success({ message: `Logged in as ${values.username}` })
+        })
+        console.log(values)
     };
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
