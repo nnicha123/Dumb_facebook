@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/users',userRoutes)
 app.use('/profiles',profileRoutes)
 app.use('/comments',commentRoutes)
+
 db.sequelize.sync().then(() => {
     app.listen(Number(process.env.PORT),() => {
         console.log(`Listening on port ${process.env.PORT}`)

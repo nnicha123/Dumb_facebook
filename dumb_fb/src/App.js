@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
-
+import axios from './config/axios'
 import './App.css'
 import Profile from './components/Profile'
 import Login from './components/Login'
@@ -15,6 +15,9 @@ class App extends Component {
     profile:{name:'Lucy Sun',pic:lucy,coverpic:boat,gender:'female'},
     posts:[{image:sunset,comment:'With my bestie in this beautiful place',postOwnerImg:lucy,name:'Lucy Sun'}]
   }
+  // componentDidMount = () => {
+  //   axios.get('localhost:8000/users/login').then(res => console.log(res))
+  // }
   render() {
     return (
       <div>
