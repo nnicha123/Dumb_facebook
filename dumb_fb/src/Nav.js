@@ -6,6 +6,7 @@ import {notification} from 'antd'
 function Nav() {
   const logOut = () => {
     LocalStorageService.removeToken()
+    LocalStorageService.removeUserName()
     notification.info({message:'You are now logged out'})
     window.location.replace('/')
   }
