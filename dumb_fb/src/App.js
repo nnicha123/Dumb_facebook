@@ -10,6 +10,7 @@ import lucy from './users/lucy.jpg'
 import lucyCover from './users/lucy-cover.jpg'
 import sunset from './users/sunset.jpg'
 import boat from './users/boat.jpeg'
+import 'antd/dist/antd.css'
 class App extends Component {
   state ={
     profile:{name:'Lucy Sun',pic:lucy,coverpic:boat,gender:'female'},

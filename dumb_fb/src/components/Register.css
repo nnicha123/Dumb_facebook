@@ -1,11 +1,11 @@
-.formWrapper{
+.registerWrapper{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
 }
-.outerLogin{
+.outerRegister{
     width: 600px;
-    height: 300px;
+    height: max-content;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
