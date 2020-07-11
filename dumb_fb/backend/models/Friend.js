@@ -1,5 +1,5 @@
 module.exports = (sequelize,DataTypes) => {
-    const model = sequelize.define("User",{
+    const model = sequelize.define('Friend',{
         username:{
             type:DataTypes.STRING(255)
         },
@@ -22,13 +22,11 @@ module.exports = (sequelize,DataTypes) => {
             type:DataTypes.STRING(10)
         }
     },{
-        tableName:'users',
+        tableName:'friends',
         timestamps:false
     })
     model.associate = models => {
-        model.hasOne(models.Profile,{foreignKey:'user_id'})
-        model.hasMany(models.Comment,{foreignKey:'user_id'})
-        model.belongsToMany(models.Friend,{through:models.Own,foreignKey:'user_id'})
+        model.belongsToMany(models.User,{through:models.Own,foreignKey:'friend_id'})
     }
     return model
 }
